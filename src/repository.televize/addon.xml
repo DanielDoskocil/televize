@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.televize" name="Televize" version="1.0.0" provider-name="Arnošt">
+    <extension point="xbmc.addon.repository" name="Televize">
+        <dir>
+            <info compressed="false">https://danieldoskocil.github.io/televize/addons.xml</info>
+            <checksum>https://danieldoskocil.github.io/televize/addons.xml.md5</checksum>
+            <datadir zip="true">https://danieldoskocil.github.io/televize/zips</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="cs_CZ">Drobnosti k televizi.</summary>
+        <summary lang="en_GB">Small bits for the TV.</summary>
+        <description lang="cs_CZ">Jednoduché úložiště drobností k televizi.</description>
+        <description lang="en_GB">A simple store of small bits for the TV.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>

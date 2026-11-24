@@ -22,14 +22,13 @@ SPOTLIGHT_KEYS = ("Path", "Target", "Label", "Limit", "SortMethod", "SortOrder")
 # Not .json: copy_menufolder would otherwise treat this as a shortcuts node.
 SPOTLIGHT_BACKUP = "homeswitcher-spotlight.txt"
 
-# Same filtered CZtor list as the "Novinky – filmy" widget row.
-SPOTLIGHT_LABEL = "Novinky – filmy"
+# Same CZtor list as the "Populární" widget row.
+# trending.movie.quarter is not a filterable section, so CZtor does not
+# prepend the "Pokročilý filtr" tile and no get_filter_dir wrapper is needed.
+SPOTLIGHT_LABEL = "Populární"
 SPOTLIGHT_TARGET = "videos"
 SPOTLIGHT_PATH = (
-    "plugin://script.skinvariables/?info=get_filter_dir"
-    "&library=video&exclude_key=title"
-    "&exclude_value=Pokro%C4%8Dil%C3%BD%20filtr%20%2F%20Dal%C5%A1%C3%AD%20str%C3%A1nka"
-    "&&plugin://plugin.video.cztor/?action=browse&section=news&media=movie"
+    "plugin://plugin.video.cztor/?action=browse&section=trending.movie.quarter"
 )
 
 
@@ -232,7 +231,7 @@ def make_backup():
 def apply_layout():
     if not dialog().yesno(
         loc(32000, "Rozvržení"),
-        loc(32020, "Nahradí aktuální řady na domovské obrazovce a nastaví velký úvodní banner na Novinky – filmy. Nejdřív se vytvoří záloha. Pokračovat?"),
+        loc(32020, "Nahradí aktuální řady na domovské obrazovce a nastaví velký úvodní banner na Populární. Nejdřív se vytvoří záloha. Pokračovat?"),
     ):
         return
     if not check_environment():

@@ -1,15 +1,15 @@
 [
     {
-        "label": "Pokračovat ve sledování",
+        "label": "Populární",
         "icon": "",
-        "path": "plugin://plugin.video.cztor/?action=browse&section=continue",
+        "path": "plugin://plugin.video.cztor/?action=browse&section=trending.movie.quarter",
         "target": "videos",
         "widget_style": "Poster"
     },
     {
-        "label": "Tip na večer",
+        "label": "Pokračovat ve sledování",
         "icon": "",
-        "path": "plugin://plugin.video.cztor/?action=browse&section=for_you",
+        "path": "plugin://plugin.video.cztor/?action=browse&section=continue",
         "target": "videos",
         "widget_style": "Poster"
     },
@@ -24,13 +24,6 @@
         "label": "Novinky – seriály",
         "icon": "",
         "path": "plugin://script.skinvariables/?info=get_filter_dir&library=video&exclude_key=title&exclude_value=Pokro%C4%8Dil%C3%BD%20filtr%20%2F%20Dal%C5%A1%C3%AD%20str%C3%A1nka&&plugin://plugin.video.cztor/?action=browse&section=news&media=episode",
-        "target": "videos",
-        "widget_style": "Poster"
-    },
-    {
-        "label": "Populární",
-        "icon": "",
-        "path": "plugin://plugin.video.cztor/?action=browse&section=trending.movie.quarter",
         "target": "videos",
         "widget_style": "Poster"
     },

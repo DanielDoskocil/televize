@@ -4,5 +4,7 @@ Po instalaci je lze kdykoli změnit v nastavení vzhledu
 a opětovným spuštěním doplňku.
 Cesty začínající plugin://script.skinvariables/?info=get_filter_dir skrývají ovládací
 položky (Pokročilý filtr, Další stránka, u Dabovaných i Hledat) z řádku s novinkami
-a filmy. Ostatní řádky jdou přímo na zdroj.
-Od verze 1.0.1 doplněk nastaví spotlight na Novinky – filmy (stejná filtrovaná cesta).
+a dabovanými filmy. Populární a ostatní řádky jdou přímo na zdroj; u Populárních
+CZtor dlaždici filtru nepřidává.
+Od verze 1.0.2 je spotlight i první řada Populární (trending.movie.quarter).
+Řada Tip na večer je odebraná.

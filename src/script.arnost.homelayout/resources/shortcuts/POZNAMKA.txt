@@ -1,0 +1,5 @@
+Řady na domovské obrazovce. Po instalaci je lze kdykoli změnit v nastavení vzhledu
+(Customise shortcuts / widgets) nebo úpravou tohoto JSON a opětovným spuštěním doplňku.
+Cesty začínající plugin://script.skinvariables/?info=get_filter_dir skrývají ovládací
+položky (Pokročilý filtr, Další stránka, u Dabovaných i Hledat) z řádku s novinkami
+a filmy. Ostatní řádky jdou přímo na zdroj.

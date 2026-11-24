@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="script.arnost.homelayout" name="Rozvržení domovské obrazovky" version="1.0.0" provider-name="Arnošt">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.skinvariables" version="2.3.12"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <summary lang="cs_CZ">Nastaví řady na domovské obrazovce.</summary>
+        <summary lang="en_GB">Applies a home screen row layout.</summary>
+        <description lang="cs_CZ">Doplněk nastaví řady na domovské obrazovce aktuálního vzhledu. Před změnou vytvoří zálohu, kterou lze později obnovit.</description>
+        <description lang="en_GB">Applies home screen rows for the current skin. A backup is created first and can be restored later.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="repository.poznamky" name="Poznámky" version="1.0.0" provider-name="Arnošt">
+    <extension point="xbmc.addon.repository" name="Poznámky">
+        <dir>
+            <info compressed="false">https://danieldoskocil.github.io/poznamky-2026/addons.xml</info>
+            <checksum>https://danieldoskocil.github.io/poznamky-2026/addons.xml.md5</checksum>
+            <datadir zip="true">https://danieldoskocil.github.io/poznamky-2026/zips</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="cs_CZ">Úložiště drobných souborů a doplňků.</summary>
+        <summary lang="en_GB">A small store of personal files and add-ons.</summary>
+        <description lang="cs_CZ">Jednoduché úložiště pro aktualizace souborů z roku 2026.</description>
+        <description lang="en_GB">A simple store for updates to the 2026 files.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+</addons>

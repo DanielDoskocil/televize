@@ -1,0 +1,70 @@
+# Rozvržení domovské obrazovky
+msgid ""
+msgstr ""
+"Language: en_GB\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#32000"
+msgid "Home layout"
+msgstr "Home layout"
+
+msgctxt "#32001"
+msgid "Apply layout"
+msgstr "Apply layout"
+
+msgctxt "#32002"
+msgid "Restore backup"
+msgstr "Restore backup"
+
+msgctxt "#32003"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgctxt "#32010"
+msgid "Please switch to the Arctic Fuse 3 skin first."
+msgstr "Please switch to the Arctic Fuse 3 skin first."
+
+msgctxt "#32011"
+msgid "Skin Variables is not installed, so the skin cannot save the rows."
+msgstr "Skin Variables is not installed, so the skin cannot save the rows."
+
+msgctxt "#32012"
+msgid "The video add-on these rows use is not installed. The rows may stay empty. Continue anyway?"
+msgstr "The video add-on these rows use is not installed. The rows may stay empty. Continue anyway?"
+
+msgctxt "#32020"
+msgid "This will replace the current home screen rows. A backup will be created first. Continue?"
+msgstr "This will replace the current home screen rows. A backup will be created first. Continue?"
+
+msgctxt "#32021"
+msgid "The backup or write failed: {0}"
+msgstr "The backup or write failed: {0}"
+
+msgctxt "#32022"
+msgid "The layout is applied. Backup: {0}. The screen will reload in a moment."
+msgstr "The layout is applied. Backup: {0}. The screen will reload in a moment."
+
+msgctxt "#32023"
+msgid "The layout is applied. The screen will reload in a moment."
+msgstr "The layout is applied. The screen will reload in a moment."
+
+msgctxt "#32030"
+msgid "There is no backup yet."
+msgstr "There is no backup yet."
+
+msgctxt "#32031"
+msgid "Select a backup"
+msgstr "Select a backup"
+
+msgctxt "#32032"
+msgid "Restore backup {0}? The current rows will be overwritten."
+msgstr "Restore backup {0}? The current rows will be overwritten."
+
+msgctxt "#32033"
+msgid "Restore failed: {0}"
+msgstr "Restore failed: {0}"
+
+msgctxt "#32034"
+msgid "The backup has been restored. The screen will reload in a moment."
+msgstr "The backup has been restored. The screen will reload in a moment."

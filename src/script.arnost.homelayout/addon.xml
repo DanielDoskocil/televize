@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.arnost.homelayout" name="Rozvržení domovské obrazovky" version="1.0.0" provider-name="Arnošt">
+<addon id="script.arnost.homelayout" name="Rozvržení domovské obrazovky" version="1.0.1" provider-name="Arnošt">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.skinvariables" version="2.3.12"/>
@@ -11,8 +11,10 @@
         <reuselanguageinvoker>false</reuselanguageinvoker>
         <summary lang="cs_CZ">Nastaví řady na domovské obrazovce.</summary>
         <summary lang="en_GB">Applies a home screen row layout.</summary>
-        <description lang="cs_CZ">Doplněk nastaví řady na domovské obrazovce aktuálního vzhledu. Před změnou vytvoří zálohu, kterou lze později obnovit.</description>
-        <description lang="en_GB">Applies home screen rows for the current skin. A backup is created first and can be restored later.</description>
+        <description lang="cs_CZ">Doplněk nastaví řady a úvodní banner (spotlight) na domovské obrazovce aktuálního vzhledu. Před změnou vytvoří zálohu, kterou lze později obnovit.</description>
+        <description lang="en_GB">Applies home screen rows and the spotlight banner for the current skin. A backup is created first and can be restored later.</description>
+        <news lang="cs_CZ">1.0.1: Nastaví velký úvodní banner (spotlight) hubu CzTor na Novinky – filmy.</news>
+        <news lang="en_GB">1.0.1: Sets the CzTor hub spotlight to CZtor New movies.</news>
         <platform>all</platform>
         <license>MIT</license>
         <assets>

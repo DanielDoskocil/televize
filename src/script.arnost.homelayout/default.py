@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+import json
 
 import xbmc
 import xbmcaddon
@@ -15,6 +16,21 @@ SKINVARS_ID = "script.skinvariables"
 NODES_DIR = "special://profile/addon_data/script.skinvariables/nodes/skin.arctic.fuse.3/"
 SHORTCUTS = "special://home/addons/{0}/resources/shortcuts/".format(ADDON_ID)
 BACKUPS = "special://profile/addon_data/{0}/backups/".format(ADDON_ID)
+
+HUB_WINDOWS = ("Home", "1101", "1102", "1103", "1104", "1106", "1107", "1108", "1109")
+SPOTLIGHT_KEYS = ("Path", "Target", "Label", "Limit", "SortMethod", "SortOrder")
+# Not .json: copy_menufolder would otherwise treat this as a shortcuts node.
+SPOTLIGHT_BACKUP = "homeswitcher-spotlight.txt"
+
+# Same filtered CZtor list as the "Novinky – filmy" widget row.
+SPOTLIGHT_LABEL = "Novinky – filmy"
+SPOTLIGHT_TARGET = "videos"
+SPOTLIGHT_PATH = (
+    "plugin://script.skinvariables/?info=get_filter_dir"
+    "&library=video&exclude_key=title"
+    "&exclude_value=Pokro%C4%8Dil%C3%BD%20filtr%20%2F%20Dal%C5%A1%C3%AD%20str%C3%A1nka"
+    "&&plugin://plugin.video.cztor/?action=browse&section=news&media=movie"
+)
 
 
 def loc(string_id, fallback=""):
@@ -72,8 +88,102 @@ def folder_has_files(path):
     return any(folder_has_files(slash(path) + name) for name in dirs)
 
 
+def backup_has_shortcut_json(path):
+    dirs, files = list_dir(path)
+    if any(name.lower().endswith(".json") for name in files):
+        return True
+    return any(backup_has_shortcut_json(slash(path) + name) for name in dirs)
+
+
 def stamp():
     return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+
+def skin_string(key):
+    return xbmc.getInfoLabel("Skin.String({0})".format(key)) or ""
+
+
+def set_skin_string(key, value):
+    if value is None or value == "":
+        xbmc.executebuiltin("Skin.Reset({0})".format(key), True)
+        return
+    xbmc.executebuiltin("Skin.SetString({0},{1})".format(key, value), True)
+
+
+def collect_spotlight():
+    data = {}
+    for window in HUB_WINDOWS:
+        entry = {}
+        for key in SPOTLIGHT_KEYS:
+            entry[key] = skin_string("HomeSwitcher.{0}.Spotlight.{1}".format(window, key))
+        if any(entry.values()):
+            data[window] = entry
+    return data
+
+
+def apply_spotlight_data(data):
+    if not data:
+        return
+    for window, entry in data.items():
+        if window not in HUB_WINDOWS:
+            continue
+        for key in SPOTLIGHT_KEYS:
+            if key in entry:
+                set_skin_string("HomeSwitcher.{0}.Spotlight.{1}".format(window, key), entry.get(key) or "")
+
+
+def write_text(path, text):
+    handle = xbmcvfs.File(path, "w")
+    try:
+        written = handle.write(text)
+    finally:
+        handle.close()
+    if written is False:
+        raise IOError("Cannot write {0}".format(path))
+
+
+def read_text(path):
+    handle = xbmcvfs.File(path, "r")
+    try:
+        raw = handle.read()
+    finally:
+        handle.close()
+    if isinstance(raw, bytes):
+        raw = raw.decode("utf-8")
+    return raw or ""
+
+
+def save_spotlight_backup(dest):
+    payload = json.dumps(collect_spotlight(), ensure_ascii=False, indent=2)
+    write_text(slash(dest) + SPOTLIGHT_BACKUP, payload)
+
+
+def load_spotlight_backup(src):
+    path = slash(src) + SPOTLIGHT_BACKUP
+    if not exists(path):
+        return None
+    raw = read_text(path)
+    if not raw.strip():
+        return None
+    return json.loads(raw)
+
+
+def target_hubs():
+    windows = ["Home"]
+    for window in HUB_WINDOWS:
+        name = skin_string("HomeSwitcher.{0}.Name".format(window))
+        compact = name.lower().replace(" ", "")
+        if "cztor" in compact and window not in windows:
+            windows.append(window)
+    return windows
+
+
+def apply_spotlight():
+    for window in target_hubs():
+        prefix = "HomeSwitcher.{0}.Spotlight".format(window)
+        set_skin_string(prefix + ".Path", SPOTLIGHT_PATH)
+        set_skin_string(prefix + ".Target", SPOTLIGHT_TARGET)
+        set_skin_string(prefix + ".Label", SPOTLIGHT_LABEL)
 
 
 def rebuild_and_reload():
@@ -110,19 +220,19 @@ def check_environment():
 
 
 def make_backup():
-    if not exists(NODES_DIR) or not folder_has_files(NODES_DIR):
-        return ""
     name = stamp()
     dest = slash(BACKUPS) + name + "/"
     xbmcvfs.mkdirs(dest)
-    copy_tree(NODES_DIR, dest)
+    if exists(NODES_DIR) and folder_has_files(NODES_DIR):
+        copy_tree(NODES_DIR, dest)
+    save_spotlight_backup(dest)
     return name
 
 
 def apply_layout():
     if not dialog().yesno(
         loc(32000, "Rozvržení"),
-        loc(32020, "Nahradí aktuální řady na domovské obrazovce. Nejdřív se vytvoří záloha. Pokračovat?"),
+        loc(32020, "Nahradí aktuální řady na domovské obrazovce a nastaví velký úvodní banner na Novinky – filmy. Nejdřív se vytvoří záloha. Pokračovat?"),
     ):
         return
     if not check_environment():
@@ -130,6 +240,7 @@ def apply_layout():
     try:
         backup = make_backup()
         run_copy_menufolder(SHORTCUTS)
+        apply_spotlight()
     except Exception as exc:
         dialog().ok(loc(32000, "Rozvržení"), loc(32021, "Záloha nebo zápis se nepovedly: {0}").format(exc))
         return
@@ -168,7 +279,12 @@ def restore_backup():
     # Keep a safety copy of the state we are about to replace.
     try:
         make_backup()
-        run_copy_menufolder(slash(BACKUPS) + name + "/")
+        src = slash(BACKUPS) + name + "/"
+        if backup_has_shortcut_json(src):
+            run_copy_menufolder(src)
+        spotlight = load_spotlight_backup(src)
+        if spotlight is not None:
+            apply_spotlight_data(spotlight)
     except Exception as exc:
         dialog().ok(loc(32000, "Rozvržení"), loc(32033, "Obnova se nepovedla: {0}").format(exc))
         return

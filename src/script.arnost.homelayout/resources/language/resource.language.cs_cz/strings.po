@@ -34,8 +34,8 @@ msgid "The video add-on these rows use is not installed. The rows may stay empty
 msgstr "Video doplněk, ze kterého řady čerpají, není nainstalovaný. Řady mohou zůstat prázdné. Přesto pokračovat?"
 
 msgctxt "#32020"
-msgid "This will replace the current home screen rows. A backup will be created first. Continue?"
-msgstr "Nahradí aktuální řady na domovské obrazovce. Nejdřív se vytvoří záloha. Pokračovat?"
+msgid "This will replace the current home screen rows and set the spotlight banner to New movies. A backup will be created first. Continue?"
+msgstr "Nahradí aktuální řady na domovské obrazovce a nastaví velký úvodní banner na Novinky – filmy. Nejdřív se vytvoří záloha. Pokračovat?"
 
 msgctxt "#32021"
 msgid "The backup or write failed: {0}"

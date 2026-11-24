@@ -34,8 +34,8 @@ msgid "The video add-on these rows use is not installed. The rows may stay empty
 msgstr "The video add-on these rows use is not installed. The rows may stay empty. Continue anyway?"
 
 msgctxt "#32020"
-msgid "This will replace the current home screen rows. A backup will be created first. Continue?"
-msgstr "This will replace the current home screen rows. A backup will be created first. Continue?"
+msgid "This will replace the current home screen rows and set the spotlight banner to New movies. A backup will be created first. Continue?"
+msgstr "This will replace the current home screen rows and set the spotlight banner to New movies. A backup will be created first. Continue?"
 
 msgctxt "#32021"
 msgid "The backup or write failed: {0}"
